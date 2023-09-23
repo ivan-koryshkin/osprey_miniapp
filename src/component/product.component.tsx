@@ -11,26 +11,18 @@ import { useAppSelector, useAppDispatch } from "../app.hooks";
 import {
     addToCart,
     fetchProductList,
-    ProductListPage, removeFromCart, switchModal,
+    ProductListPage, removeFromCart,
 } from "../store/slices/product.slice";
-import {CartItem, ProductData} from "../types";
-import {useNavigate, useParams} from "react-router-dom";
+import {ProductData} from "../types";
+import {useParams} from "react-router-dom";
 import {
     MinusOutlined,
-    PlusOutlined,
-    ShoppingCartOutlined
+    PlusOutlined
 } from "@ant-design/icons";
 import { CartStorage } from '../storage/cart.storage'
-import type { ColumnsType } from 'antd/es/table';
-import {BackButton} from "./backbutton.component";
-
-
-interface DataType {
-    key: React.Key;
-    name: string;
-    count: number;
-    price: number;
-}
+import { WebAppPage } from "./page.component";
+import '../styles/product.component.css'
+import '../styles/card.component.css'
 
 
 export const ProductList = () => {
@@ -48,68 +40,45 @@ export const ProductList = () => {
         }
     }, []);
 
-    const cartContent = () => {
-        const columns: ColumnsType<DataType> = [
-            {
-                title: 'Name',
-                dataIndex: 'name',
-                width: 30,
-            },
-            {
-                title: 'Count',
-                dataIndex: 'count',
-                width: 30,
-            },
-            {
-                title: 'Price',
-                dataIndex: 'price',
-                width: 30
-            },
-        ]
-
-        const data: DataType[] = state.cart.map((item: CartItem) => {
-            return {
-                key: item.productId,
-                name: item.name,
-                count: item.count,
-                price: 0
-            }
-        })
-
-        return (
-            <Table
-                columns={columns}
-                dataSource={data}
-                pagination={{ pageSize: 50 }}
-                scroll={{ y: 240 }}
-            />
-        )
-    }
-
     const buildList = () => {
         return (
             <List
                 dataSource={state.productList ? state.productList : []}
                 renderItem={(product: ProductData) => (
                     <List.Item>
-                        <Card size="small" title={product.name} style={{ width: '100%', marginBottom: 16 }}>
-                            <p>{product.description}</p>
-                            <p>{product.price}</p>
-                            <Button
-                                icon={<PlusOutlined />}
-                                style={{width: '25%'}}
-                                onClick={ () => {
-                                    dispatch(addToCart(product))
-                                }}
-                            />
-                            {storage.count(product.id)}
-                            <Button
-                                icon={<MinusOutlined />}
-                                style={{width: '25%', marginRight: 'auto'}}
-                                onClick={ () => {
-                                    dispatch(removeFromCart(product))
-                                }}
-                            />
+                        <Card
+                            size="small"
+                            title={
+                                <div className="card-title">
+                                    {product.name}
+                                </div>
+                            }
+                        >
+                            <div className="card-description">
+                                <p>{product.description}</p>
+                            </div>
+                            <div className="product-cart-price">
+                                <p>{product.price}</p>
+                            </div>
+                            <div className="product-cart-controls">
+                                <Button
+                                    icon={<PlusOutlined />}
+                                    style={{width: '25%'}}
+                                    onClick={ () => {
+                                        dispatch(addToCart(product))
+                                    }}
+                                />
+                                <div className="product-cart-count">
+                                    {storage.count(product.id)}
+                                </div>
+                                <Button
+                                    icon={<MinusOutlined />}
+                                    style={{width: '25%', marginRight: 'auto'}}
+                                    onClick={ () => {
+                                        dispatch(removeFromCart(product))
+                                    }}
+                                />
+                            </div>
                         </Card>
                     </List.Item>
                 )}
@@ -119,21 +88,8 @@ export const ProductList = () => {
     }
 
     return (
-        <div style={{ width: "100%" }}>
+        <WebAppPage>
             {buildList()}
-            <BackButton/>
-            <FloatButton
-                icon={<ShoppingCartOutlined />}
-                onClick={() => dispatch(switchModal())}
-            />;
-            <Modal
-                title="Basic Modal"
-                open={state.showCart}
-                onOk={ () => dispatch(switchModal()) }
-                onCancel={ () => dispatch(switchModal())}
-            >
-                {cartContent()}
-            </Modal>
-        </div>
+        </WebAppPage>
     )
 }

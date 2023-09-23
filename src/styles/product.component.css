@@ -1,0 +1,33 @@
+.product-cart-controls {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.product-cart-controls button {
+    flex: 1;
+    background: #1677ff;
+    height: 40px;
+}
+
+.product-cart-count {
+    font-size: 20px;
+    font-family: "DejaVu Sans", serif;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.product-cart-description {
+    font-size: 15px;
+    font-family: "DejaVu Sans", serif;
+}
+
+.product-cart-title {
+    font-size: 20px;
+}
+
+.product-cart-price {
+    font-size: 20px;
+    font-family: "DejaVu Sans", serif;
+}

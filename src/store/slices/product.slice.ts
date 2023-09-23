@@ -17,13 +17,11 @@ export interface ProductListPage {
     status: 'done' | 'error' | 'pending' | 'idle'
     productList?: ProductData[]
     cart: CartItem[]
-    showCart: boolean
 }
 
 const initialState: ProductListPage = {
     status: "idle",
     cart: [],
-    showCart: false
 }
 
 export const fetchProductList = createAsyncThunk<ProductListPage, ProductFetchParams> (
@@ -65,9 +63,6 @@ const productListPageSlice = createSlice({
             const cart = new CartStorage();
             state.cart = cart.dec(action.payload);
         },
-        switchModal: (state: ProductListPage) => {
-            state.showCart = !state.showCart;
-        }
     },
     extraReducers: (builder: ActionReducerMapBuilder<ProductListPage>) => {
         builder
@@ -98,7 +93,6 @@ const productListPageSlice = createSlice({
 export const {
     clear,
     addToCart,
-    removeFromCart,
-    switchModal
+    removeFromCart
 } = productListPageSlice.actions;
 export default productListPageSlice.reducer;
