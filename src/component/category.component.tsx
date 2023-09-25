@@ -1,18 +1,17 @@
-import React, { useEffect } from "react";
-import {Card, Col, List, Row} from 'antd'
-import { useAppSelector, useAppDispatch } from "../app.hooks";
+import React, {useEffect} from "react";
+import {Card, List} from 'antd'
+import {useAppDispatch, useAppSelector} from "../app.hooks";
 import {
-    fetchCategoryList,
     CategoryListPage,
+    fetchCategoryList,
 } from "../store/slices/category.slice";
-import { CategoryData } from "../types";
+import {CategoryData} from "../types";
 import {useNavigate, useParams} from "react-router-dom";
 import {WebAppPage} from "./page.component";
 import "../styles/card.component.css"
 
 
 export const CategoryList = () => {
-    const rowSize = 1;
     const state = useAppSelector<CategoryListPage>(state => state.categoryPage)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()

@@ -27,11 +27,24 @@ const pageSlice = createSlice({
         },
         cartAdd: (state: PageState, action: PayloadAction<ProductData>) => {
             const storage = new CartStorage();
-            state.cart = storage.inc(action.payload);
+            state.cart = storage.addItem(action.payload);
         },
         cartRemove: (state: PageState, action: PayloadAction<ProductData>) => {
             const storage = new CartStorage();
-            state.cart = storage.dec(action.payload);
+            state.cart = storage.removeItem(action.payload);
+        },
+        incrementProduct: (state: PageState, action: PayloadAction<string>) => {
+            const storage = new CartStorage();
+            state.cart = storage.increment(action.payload);
+        },
+        decrementProduct: (state: PageState, action: PayloadAction<string>) => {
+            const storage = new CartStorage();
+            state.cart = storage.decrement(action.payload);
+        },
+        sendCartToBot: (state: PageState) => {
+            const storage = new CartStorage();
+            storage.sendData()
+            state.cart = []
         }
     }
 })
@@ -40,6 +53,9 @@ const pageSlice = createSlice({
 export const {
     changeCartVisibility,
     cartAdd,
-    cartRemove
+    cartRemove,
+    incrementProduct,
+    decrementProduct,
+    sendCartToBot
 } = pageSlice.actions;
 export default pageSlice.reducer;

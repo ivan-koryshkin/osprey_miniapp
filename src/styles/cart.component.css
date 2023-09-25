@@ -1,7 +1,29 @@
-.cart-item-list {
-    font-size: 50dvi;
+.card-description {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.cart-table-cell {
-    font-size: 100px;
+.card-description button {
+    flex: 1;
+    margin-left: 5px;
+}
+
+.cart-item-content{
+    width: 60%;
+    font-size: 4dvi;
+    text-align: center;
+}
+
+.cart-item-name {
+    font-family: "DejaVu Sans", serif;
+    font-size: 4dvi;
+}
+
+.cart-item-count {
+    font-size: 4dvi;
+}
+
+.cart-item-price {
+
 }

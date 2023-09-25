@@ -1,53 +1,50 @@
 import React from 'react'
-import {ColumnsType} from "antd/es/table";
 import {CartItem} from "../types";
-import {Table} from "antd";
+import {Button, Card, List} from "antd";
 
-interface DataType {
-    key: React.Key;
-    name: string;
-    count: number;
-    price: number;
-}
+import "../styles/cart.component.css"
+
 
 interface CartProps {
     products: CartItem[]
+    onAdd: (productId: string) => void
+    onRemove: (productId: string) => void
 }
 
 export const Cart: React.FC<CartProps> = (props: CartProps) => {
-    const columns: ColumnsType<DataType> = [
-        {
-            title: 'Name',
-            dataIndex: 'name',
-            width: 30,
-        },
-        {
-            title: 'Count',
-            dataIndex: 'count',
-            width: 30,
-        },
-        {
-            title: 'Price',
-            dataIndex: 'price',
-            width: 30
-        },
-    ]
-
-    const data: DataType[] = props.products.map((item: CartItem) => {
-        return {
-            key: item.productId,
-            name: item.name,
-            count: item.count,
-            price: 0
-        }
-    })
-
     return (
-        <Table
-            columns={columns}
-            dataSource={data}
-            pagination={false}
-            scroll={{ y: 240 }}
+        <List
+            itemLayout="vertical"
+            dataSource={props.products}
+            renderItem={(item: CartItem) => (
+                <List.Item>
+                    <Card
+                        size="small"
+                        title={
+                            <div className="cart-item-name">
+                                {item.name}
+                            </div>
+                        }
+                    >
+                        <div className="cart-item-container">
+                            <div className="card-description">
+                                <span className="cart-item-content">
+                                    x{item.count}: 0
+                                </span>
+                                <Button
+                                    type="primary"
+                                    onClick={ () => props.onAdd(item.productId) }
+                                >+</Button>
+                                <Button
+                                    type="primary"
+                                    danger
+                                    onClick={ () => props.onRemove(item.productId) }
+                                >-</Button>
+                            </div>
+                        </div>
+                    </Card>
+                </List.Item>
+            )}
         />
     )
 }

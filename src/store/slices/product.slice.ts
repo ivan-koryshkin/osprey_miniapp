@@ -57,11 +57,11 @@ const productListPageSlice = createSlice({
         },
         addToCart: (state: ProductListPage, action: PayloadAction<ProductData>) => {
             const cart = new CartStorage();
-            state.cart = cart.inc(action.payload)
+            state.cart = cart.addItem(action.payload)
         },
         removeFromCart: (state: ProductListPage, action: PayloadAction<ProductData>) => {
             const cart = new CartStorage();
-            state.cart = cart.dec(action.payload);
+            state.cart = cart.removeItem(action.payload);
         },
     },
     extraReducers: (builder: ActionReducerMapBuilder<ProductListPage>) => {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {Card, Col, List, Row} from 'antd'
+import {Card, List} from 'antd'
 import { useAppSelector, useAppDispatch } from "../app.hooks";
 import {
     AccountListPage,

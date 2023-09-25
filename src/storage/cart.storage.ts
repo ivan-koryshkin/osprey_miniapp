@@ -1,4 +1,4 @@
-import { WebStorage } from "./web.storage";
+import {WebStorage} from "./web.storage";
 import {CartItem, ProductData} from "../types";
 
 const CART_KEY = "cart"
@@ -21,7 +21,7 @@ export class CartStorage extends WebStorage {
         return JSON.stringify(items)
     }
 
-    inc(product: ProductData)  : CartItem[] {
+    addItem(product: ProductData)  : CartItem[] {
         let cartItems = this.deserialize();
         const existing = cartItems.filter((item: CartItem) => {
             return item.productId === product.id
@@ -33,25 +33,55 @@ export class CartStorage extends WebStorage {
                 count: 1
             });
         } else {
+            cartItems = this.increment(product.id)
+        }
+        this.add(this.serialize(cartItems))
+        return cartItems
+    }
+
+    removeItem(product: ProductData) : CartItem[] {
+        return this.decrement(product.id);
+    }
+
+    clearAll() {
+        this.add(this.serialize([]));
+    }
+
+    count(productId: string) : number {
+        let cart = this.deserialize();
+        const item = cart.filter((item: CartItem) => {
+            return item.productId === productId;
+        })
+        return item.length !== 0 ? item[0].count : 0;
+    }
+
+    increment(productId: string) : CartItem[] {
+        let cartItems = this.deserialize();
+        if(cartItems.length > 0) {
             cartItems = cartItems.map((p: CartItem) => {
-                if(p.productId === product.id) {
-                        p.count++;
+                if(p.productId === productId) {
+                    p.count++;
                 }
                 return p
+            })
+            cartItems = cartItems.filter((p: CartItem) => {
+                if(p.count >= 1) {
+                    return p
+                }
             })
         }
         this.add(this.serialize(cartItems))
         return cartItems
     }
 
-    dec(product: ProductData) : CartItem[] {
+    decrement(productId: string) : CartItem[] {
         let cartItems = this.deserialize();
         const existing = cartItems.filter((item: CartItem) => {
-            return item.productId === product.id
+            return item.productId === productId
         })
         if(existing.length !== 0) {
             cartItems = cartItems.map((p: CartItem) => {
-                if(p.productId === product.id) {
+                if(p.productId === productId) {
                     p.count--;
                 }
                 return p
@@ -66,15 +96,25 @@ export class CartStorage extends WebStorage {
         return cartItems
     }
 
-    clearAll() {
-        this.add(this.serialize([]));
+    prepareData() : string {
+        const items = this.deserialize();
+        let msg = "";
+        items.forEach((item: CartItem) => {
+            msg += `#${item.productId}\n`
+            msg += `$x{item.count} - ${item.name}}\n`
+        })
+        return msg
     }
 
-    count(productId: string) : number {
-        let cart = this.deserialize();
-        const item = cart.filter((item: CartItem) => {
-            return item.productId === productId;
-        })
-        return item.length !== 0 ? item[0].count : 0;
+    sendData() : boolean {
+        try {
+            const data = this.prepareData();
+            window.Telegram.WebApp.sendData("data")
+            return true;
+        } catch (e: any) {
+            console.log('sendDataError', e)
+            return false;
+        }
     }
+
 }
