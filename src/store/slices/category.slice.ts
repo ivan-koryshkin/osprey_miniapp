@@ -28,6 +28,7 @@ export const fetchCategoryList = createAsyncThunk<CategoryListPage, string> (
                     'Content-Type': 'application/json',
                 }
             });
+            console.log('new version of reducer v0')
             if(!response.ok) {
                 throw new Error("Network error")
             }
@@ -57,9 +58,12 @@ const categoryListPageSlice = createSlice({
             .addCase(
                 fetchCategoryList.fulfilled,
                 (state: CategoryListPage, action: any) => {
-                    state.status = "done";
-                    state.categoryList = action.payload;
-                    console.log(action.payload)
+                    console.log('new version of reducer')
+                    return {
+                        ...state,
+                        status: "done",
+                        categoryList: action.payload.categories
+                    }
                 }
             )
             .addCase(

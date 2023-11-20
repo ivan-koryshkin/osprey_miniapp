@@ -20,7 +20,7 @@ const TelegramUserData = () => {
         if(state.status === 'idle' && state.user) {
             dispatch(syncUser(state.user))
             navigate("/account")
-        }
+        } else {}
     })
 
     return (

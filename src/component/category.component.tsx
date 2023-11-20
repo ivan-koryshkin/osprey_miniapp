@@ -18,17 +18,30 @@ export const CategoryList = () => {
     const { accountId } = useParams()
 
     useEffect(() => {
-        console.log({accountId: accountId})
         if(accountId) {
             dispatch(fetchCategoryList(accountId))
         }
     }, []);
 
     const buildList = () => {
+        console.log({
+            categoryList: state.categoryList
+        })
+        if(state.categoryList) {
+            for (let i in state.categoryList) {
+                if (!state.categoryList) {
+                    continue
+                }
+                const category = state.categoryList[i];
+                console.log({name: category.name})
+                console.log({description: category.description})
+                console.log({id: category.id})
+            }
+        }
         return (
             <List
                 itemLayout="vertical"
-                dataSource={state.categoryList}
+                dataSource={state.categoryList ? state.categoryList : []}
                 renderItem={(category: CategoryData) => (
                     <List.Item>
                         <Card

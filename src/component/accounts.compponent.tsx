@@ -12,13 +12,14 @@ import {WebAppPage} from "./page.component";
 
 
 export const AccountList = () => {
-    const rowSize = 1;
     const state = useAppSelector<AccountListPage>((state) => state.accountPage)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
     useEffect(() => {
+        console.log('Account component')
         dispatch(fetchAccountList())
+        console.log('Account component')
     }, []);
 
     const buildList = () => {
@@ -53,6 +54,7 @@ export const AccountList = () => {
 
     return (
         <WebAppPage>
+            <h3>HUI</h3>
             {buildList()}
         </WebAppPage>
     )

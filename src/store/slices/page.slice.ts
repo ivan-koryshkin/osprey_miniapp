@@ -12,13 +12,14 @@ export interface PageState {
     cart: CartItem[]
 }
 
+const initialState = {
+    showCart: false,
+    cart: []
+}
 
 const pageSlice = createSlice({
     name: "page/slice",
-    initialState: {
-        showCart: false,
-        cart: []
-    },
+    initialState: initialState,
     reducers: {
         changeCartVisibility: (state: PageState) => {
             const storage = new CartStorage();

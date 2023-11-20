@@ -53,15 +53,15 @@ const productListPageSlice = createSlice({
     name: "productListPageSlice",
     reducers: {
         clear: (state: ProductListPage) => {
-            state.productList = undefined
+            return {...state, productList: undefined}
         },
         addToCart: (state: ProductListPage, action: PayloadAction<ProductData>) => {
             const cart = new CartStorage();
-            state.cart = cart.addItem(action.payload)
+            return {...state, cart: cart.addItem(action.payload)};
         },
         removeFromCart: (state: ProductListPage, action: PayloadAction<ProductData>) => {
             const cart = new CartStorage();
-            state.cart = cart.removeItem(action.payload);
+            return {...state, cart: cart.removeItem(action.payload)};
         },
     },
     extraReducers: (builder: ActionReducerMapBuilder<ProductListPage>) => {
@@ -91,7 +91,6 @@ const productListPageSlice = createSlice({
 })
 
 export const {
-    clear,
     addToCart,
     removeFromCart
 } = productListPageSlice.actions;

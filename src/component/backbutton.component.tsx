@@ -10,7 +10,7 @@ export const BackButton = () => {
                 style={{width: '100%'}}
                 onClick={ () => navigate(-1)}
             >
-                Back
+                Back!
             </Button>
         </div>
     )

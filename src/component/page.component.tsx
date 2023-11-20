@@ -36,7 +36,7 @@ export const WebAppPage: React.FC<WebAppPageProps> = ({ children }) => {
     return (
         <Layout className="webapp-page-container">
             <Content className="webapp-page-content">
-                {children}
+                {children ? children : []}
                 <FloatButton
                     icon={<ShoppingCartOutlined />}
                     onClick={() => dispatch(changeCartVisibility()) }
