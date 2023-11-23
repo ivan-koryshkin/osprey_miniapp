@@ -3,6 +3,7 @@ import {CartItem} from "../types";
 import {Button, Card, List} from "antd";
 
 import "../styles/cart.component.css"
+import {Application} from "../tg.miniapp/application";
 
 
 interface CartProps {
@@ -12,6 +13,7 @@ interface CartProps {
 }
 
 export const Cart: React.FC<CartProps> = (props: CartProps) => {
+    const app = new Application()
     return (
         <List
             itemLayout="vertical"
@@ -19,9 +21,11 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
             renderItem={(item: CartItem) => (
                 <List.Item>
                     <Card
+                        bordered={false}
+                        style={{...app.getSecondaryStyle()}}
                         size="small"
                         title={
-                            <div className="cart-item-name">
+                            <div style={{...app.getSecondaryStyle()}}>
                                 {item.name}
                             </div>
                         }
@@ -32,6 +36,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
                                     x{item.count}: 0
                                 </span>
                                 <Button
+                                    style={{...app.getButtonStyle()}}
                                     type="primary"
                                     onClick={ () => props.onAdd(item.productId) }
                                 >+</Button>

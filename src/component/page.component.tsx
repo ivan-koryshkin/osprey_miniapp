@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import {BackButton} from "./backbutton.component";
 import {useAppDispatch, useAppSelector} from "../app.hooks";
-import {FloatButton, Modal, Layout} from "antd";
+import {FloatButton, Modal, Layout, Button} from "antd";
 import {ShoppingCartOutlined} from "@ant-design/icons";
 import {
     changeCartVisibility, decrementProduct,
@@ -10,6 +10,7 @@ import {
 } from "../store/slices/page.slice";
 import {Cart} from './cart.component'
 import "../styles/webappPage.component.css"
+import {Application} from "../tg.miniapp/application";
 const {Footer, Content} = Layout;
 
 export interface WebAppPageProps {
@@ -19,6 +20,9 @@ export interface WebAppPageProps {
 export const WebAppPage: React.FC<WebAppPageProps> = ({ children }) => {
     const state = useAppSelector<PageState>(state => state.rootPage)
     const dispatch = useAppDispatch()
+    const app = new Application()
+    const style = app.getStyle()
+    const btnStyle = app.getButtonStyle()
 
     const increment = (productId: string) => {
         dispatch(incrementProduct(productId))
@@ -42,10 +46,24 @@ export const WebAppPage: React.FC<WebAppPageProps> = ({ children }) => {
                         onClick={() => dispatch(changeCartVisibility()) }
                     />
                     <Modal
-                        title="Cart"
-                        open={state.showCart}
-                        onOk={ () => onOk() }
+                        title={
+                            <div style={{...style}}>Cart</div>
+                        }
+                        // open={state.showCart}
+                        // onOk={ () => onOk() }
                         onCancel={ () => dispatch(changeCartVisibility())}
+                        styles={{
+                            header: { ...style },
+                            body: { ...style },
+                            footer: { ...style },
+                            content: { ...style }
+                        }}
+                        footer={
+                            <div>
+                                <Button style={{...btnStyle}} onClick={ () => onOk() }>Ok</Button>
+                                <Button style={{...btnStyle}} onClick={ () => dispatch(changeCartVisibility()) }>Cancel</Button>
+                            </div>
+                        }
                     >
                         <Cart
                             products={state.cart}
