@@ -32,31 +32,32 @@ export const WebAppPage: React.FC<WebAppPageProps> = ({ children }) => {
         dispatch(changeCartVisibility())
         dispatch(sendCartToBot())
     }
-
     return (
-        <Layout className="webapp-page-container">
-            <Content className="webapp-page-content">
-                {children ? children : []}
-                <FloatButton
-                    icon={<ShoppingCartOutlined />}
-                    onClick={() => dispatch(changeCartVisibility()) }
-                />
-                <Modal
-                    title="Cart"
-                    open={state.showCart}
-                    onOk={ () => onOk() }
-                    onCancel={ () => dispatch(changeCartVisibility())}
-                >
-                    <Cart
-                        products={state.cart}
-                        onAdd={increment}
-                        onRemove={decrement}
+        <div style={{...state.style}}>
+            <Layout className="webapp-page-container">
+                <Content className="webapp-page-content">
+                    {children ? children : []}
+                    <FloatButton
+                        icon={<ShoppingCartOutlined />}
+                        onClick={() => dispatch(changeCartVisibility()) }
                     />
-                </Modal>
-            </Content>
-            <Footer className="webapp-page-footer">
-                <BackButton/>
-            </Footer>
-        </Layout>
+                    <Modal
+                        title="Cart"
+                        open={state.showCart}
+                        onOk={ () => onOk() }
+                        onCancel={ () => dispatch(changeCartVisibility())}
+                    >
+                        <Cart
+                            products={state.cart}
+                            onAdd={increment}
+                            onRemove={decrement}
+                        />
+                    </Modal>
+                </Content>
+                <Footer className="webapp-page-footer">
+                    <BackButton/>
+                </Footer>
+            </Layout>
+        </div>
     )
 }

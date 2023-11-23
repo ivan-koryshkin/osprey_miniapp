@@ -6,10 +6,19 @@ import {
 import { UserData } from "../../types";
 import {API_USER_LIST} from "../../consts";
 
-
+export interface Theme {
+    bg_color: string,
+    text_color: string,
+    hint_color: string
+    link_color: string
+    button_color: string
+    button_text_color: string
+    secondary_bg_color: string
+}
 export interface StartPageState {
     status: 'done' | 'error' | 'pending' | 'idle'
     user?: UserData
+    theme?: Theme
 }
 
 const initialState: StartPageState = {
@@ -42,6 +51,7 @@ const startPageSlice = createSlice({
     name: "startPageSlice",
     reducers: {
         readUserData: (state: StartPageState) => {
+            let newState = {...state}
             let data: string = decodeURI(window.Telegram.WebApp.initData)
             let dataItems = data.split("&")
             const userData = dataItems.filter((item: string) => {
@@ -53,15 +63,17 @@ const startPageSlice = createSlice({
             if(userData) {
                 const raw = userData[0].replace("user=", "")
                 const decoded = JSON.parse(decodeURIComponent(raw))
-                console.log(decoded)
-                state.user = {
+                newState.user = {
                     id: decoded["id"],
                     firstName: decoded["first_name"],
                     lastName: decoded["last_name"],
                     username: decoded["username"]
                 }
             }
-        }
+            let themeData = JSON.parse(window.Telegram.WebView.initParams.tgWebAppThemeParams);
+            const theme: Theme = {...themeData};
+            return {...newState, theme: theme};
+        },
     },
     extraReducers: (builder: ActionReducerMapBuilder<StartPageState>) => {
         builder

@@ -29,9 +29,6 @@ export const fetchProductList = createAsyncThunk<ProductListPage, ProductFetchPa
     async (params: ProductFetchParams, { rejectWithValue }) => {
         try {
             const url = `${API_ACCOUNT_LIST}/${params.accountId}/category/${params.categoryId}`
-            console.log({
-                url: url
-            })
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -75,10 +72,13 @@ const productListPageSlice = createSlice({
             .addCase(
                 fetchProductList.fulfilled,
                 (state: ProductListPage, action: any) => {
-                    state.status = "done";
-                    state.productList = action.payload;
                     const cart = new CartStorage()
-                    state.cart = cart.deserialize()
+                    return {
+                        ...state,
+                        productList: action.payload,
+                        cart: cart.deserialize(),
+                        status: 'done'
+                    }
                 }
             )
             .addCase(
@@ -91,6 +91,7 @@ const productListPageSlice = createSlice({
 })
 
 export const {
+    clear,
     addToCart,
     removeFromCart
 } = productListPageSlice.actions;

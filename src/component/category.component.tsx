@@ -9,6 +9,7 @@ import {CategoryData} from "../types";
 import {useNavigate, useParams} from "react-router-dom";
 import {WebAppPage} from "./page.component";
 import "../styles/card.component.css"
+import {Application} from "../tg.miniapp/application";
 
 
 export const CategoryList = () => {
@@ -16,6 +17,7 @@ export const CategoryList = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { accountId } = useParams()
+    const app = new Application()
 
     useEffect(() => {
         if(accountId) {
@@ -24,20 +26,6 @@ export const CategoryList = () => {
     }, []);
 
     const buildList = () => {
-        console.log({
-            categoryList: state.categoryList
-        })
-        if(state.categoryList) {
-            for (let i in state.categoryList) {
-                if (!state.categoryList) {
-                    continue
-                }
-                const category = state.categoryList[i];
-                console.log({name: category.name})
-                console.log({description: category.description})
-                console.log({id: category.id})
-            }
-        }
         return (
             <List
                 itemLayout="vertical"
@@ -45,9 +33,11 @@ export const CategoryList = () => {
                 renderItem={(category: CategoryData) => (
                     <List.Item>
                         <Card
+                            style={{...app.getSecondaryStyle()}}
                             size="small"
+                            bordered={false}
                             title={
-                                <div className="card-title">
+                                <div style={{...app.getHeaderStyle()}}>
                                     {category.name}
                                 </div>
                             }
@@ -55,7 +45,7 @@ export const CategoryList = () => {
                                 navigate(`/account/${accountId}/category/${category.id}`)
                             }}
                         >
-                            <div className="card-description">
+                            <div>
                                 {category.description}
                             </div>
                         </Card>

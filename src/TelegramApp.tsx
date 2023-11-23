@@ -24,7 +24,12 @@ const TelegramUserData = () => {
     })
 
     return (
-        <div>
+        <div style={{
+            background: state.theme?.bg_color,
+            color: state.theme?.text_color,
+            display: "flex",
+            width: "100%"
+        }}>
             {state.user ? (
                 <div>
                     <h2>Telegram User Data</h2>

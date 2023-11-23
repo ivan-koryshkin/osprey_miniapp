@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background: inherit;
+    color: indianred;
 }
 
 .webapp-page-content {
@@ -10,4 +12,6 @@
 
 .webapp-page-footer {
     flex-shrink: 0;
+    background: inherit;
+    color: indianred;
 }

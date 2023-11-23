@@ -5,16 +5,20 @@ import {
 } from "@reduxjs/toolkit";
 import {CartItem, ProductData} from "../../types";
 import {CartStorage} from "../../storage/cart.storage";
+import { AppStyle } from "../../tg.miniapp/type"
+import { Application } from "../../tg.miniapp/application"
 
 
 export interface PageState {
     showCart: boolean
-    cart: CartItem[]
+    cart: CartItem[],
+    style: AppStyle
 }
 
 const initialState = {
     showCart: false,
-    cart: []
+    cart: [],
+    style: new Application().getStyle()
 }
 
 const pageSlice = createSlice({

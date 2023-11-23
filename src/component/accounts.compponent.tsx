@@ -9,12 +9,14 @@ import {useNavigate} from "react-router-dom";
 import {AccountData} from "../types";
 import "../styles/card.component.css"
 import {WebAppPage} from "./page.component";
+import { Application } from "../tg.miniapp/application"
 
 
 export const AccountList = () => {
     const state = useAppSelector<AccountListPage>((state) => state.accountPage)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const app = new Application()
 
     useEffect(() => {
         console.log('Account component')
@@ -31,10 +33,12 @@ export const AccountList = () => {
                     (account: AccountData) => (
                         <List.Item>
                             <Card
+                                style={{...app.getSecondaryStyle()}}
                                 size="small"
+                                bordered={false}
                                 title={
-                                    <div className="card-title">
-                                        {account.name}
+                                    <div style={{...app.getHeaderStyle()}}>
+                                        <h3>{account.name}</h3>
                                     </div>
                                 }
                                 onClick={ () => {
@@ -54,7 +58,6 @@ export const AccountList = () => {
 
     return (
         <WebAppPage>
-            <h3>HUI</h3>
             {buildList()}
         </WebAppPage>
     )
