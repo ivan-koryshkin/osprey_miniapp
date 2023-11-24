@@ -1,10 +1,12 @@
 FROM node:18-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 COPY package*.json ./
-RUN npm install
+COPY tsconfig.json tsconfig.json
+COPY src src
+COPY public public
 
-COPY src .
+RUN npm install
 RUN npm run build
 RUN npm install -g serve
 EXPOSE 3001
