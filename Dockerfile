@@ -7,6 +7,5 @@ COPY src src
 COPY public public
 
 RUN npm install
-RUN npm run build
+RUN npm run build --production
 RUN npm install -g serve
-EXPOSE 3001
