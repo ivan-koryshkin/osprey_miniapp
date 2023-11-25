@@ -13,6 +13,7 @@ const TelegramUserData = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
+        console.log("Init application")
         dispatch(readUserData())
     }, [dispatch]);
 
