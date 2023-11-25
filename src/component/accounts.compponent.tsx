@@ -19,10 +19,8 @@ export const AccountList = () => {
     const app = new Application()
 
     useEffect(() => {
-        console.log('Account component')
         dispatch(fetchAccountList())
-        console.log('Account component')
-    }, []);
+    }, [dispatch]);
 
     const buildList = () => {
         return (

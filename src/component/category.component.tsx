@@ -23,7 +23,7 @@ export const CategoryList = () => {
         if(accountId) {
             dispatch(fetchCategoryList(accountId))
         }
-    }, []);
+    }, [dispatch, accountId]);
 
     const buildList = () => {
         return (

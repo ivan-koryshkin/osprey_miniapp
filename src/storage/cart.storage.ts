@@ -68,6 +68,7 @@ export class CartStorage extends WebStorage {
                 if(p.count >= 1) {
                     return p
                 }
+                return null
             })
         }
         this.add(this.serialize(cartItems))
@@ -90,6 +91,7 @@ export class CartStorage extends WebStorage {
                 if(p.count >= 1) {
                     return p
                 }
+                return null
             })
         }
         this.add(this.serialize(cartItems))
@@ -108,7 +110,6 @@ export class CartStorage extends WebStorage {
 
     sendData() : boolean {
         try {
-            const data = this.prepareData();
             window.Telegram.WebApp.sendData("data")
             return true;
         } catch (e: any) {

@@ -1,7 +1,6 @@
 import {
     createSlice,
-    createAsyncThunk,
-    ActionReducerMapBuilder, PayloadAction
+    PayloadAction
 } from "@reduxjs/toolkit";
 import {CartItem, ProductData} from "../../types";
 import {CartStorage} from "../../storage/cart.storage";

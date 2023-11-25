@@ -8,14 +8,13 @@ import { useAppSelector, useAppDispatch } from "../app.hooks";
 import {
     addToCart,
     fetchProductList,
-    ProductListPage, removeFromCart, clear
+    ProductListPage, removeFromCart
 } from "../store/slices/product.slice";
 import {ProductData} from "../types";
 import {useParams} from "react-router-dom";
 import {
     MinusOutlined,
     PlusOutlined,
-    PlusSquareTwoTone
 } from "@ant-design/icons";
 import { CartStorage } from '../storage/cart.storage'
 import { WebAppPage } from "./page.component";
@@ -38,7 +37,7 @@ export const ProductList = () => {
                 categoryId: categoryId
             }))
         }
-    }, []);
+    }, [dispatch, accountId, categoryId]);
 
     const buildList = () => {
         return (

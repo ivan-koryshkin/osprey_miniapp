@@ -14,7 +14,7 @@ const TelegramUserData = () => {
 
     useEffect(() => {
         dispatch(readUserData())
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if(state.status === 'idle' && state.user) {
