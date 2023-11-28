@@ -9,4 +9,3 @@ COPY public public
 RUN npm install
 RUN npm install -g serve
 RUN npm run build --production
-CMD ["serve", "-s", "build", "-l", "3000"]
