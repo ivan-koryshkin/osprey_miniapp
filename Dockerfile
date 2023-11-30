@@ -5,7 +5,8 @@ COPY package*.json ./
 COPY tsconfig.json tsconfig.json
 COPY src src
 COPY public public
+COPY server.js server.js
 
 RUN npm install
-RUN npm install -g serve
-RUN npm run build --production
+RUN npm run build
+CMD ["node", "server.js"]
