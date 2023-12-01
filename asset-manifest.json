@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/osprey_miniapp/static/css/main.641502e5.css",
-    "main.js": "/osprey_miniapp/static/js/main.e1d2b14f.js",
+    "main.js": "/osprey_miniapp/static/js/main.96e09be2.js",
     "static/js/651.587c2069.chunk.js": "/osprey_miniapp/static/js/651.587c2069.chunk.js",
     "index.html": "/osprey_miniapp/index.html",
     "main.641502e5.css.map": "/osprey_miniapp/static/css/main.641502e5.css.map",
-    "main.e1d2b14f.js.map": "/osprey_miniapp/static/js/main.e1d2b14f.js.map",
+    "main.96e09be2.js.map": "/osprey_miniapp/static/js/main.96e09be2.js.map",
     "651.587c2069.chunk.js.map": "/osprey_miniapp/static/js/651.587c2069.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.641502e5.css",
-    "static/js/main.e1d2b14f.js"
+    "static/js/main.96e09be2.js"
   ]
 }
