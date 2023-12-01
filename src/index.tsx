@@ -5,7 +5,7 @@ import TelegramApp from "./TelegramApp";
 import { AccountList } from "./component/accounts.compponent"
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import {store} from './store/store'
 import {ProductList} from "./component/product.component";
 import {CategoryList} from "./component/category.component";
@@ -22,14 +22,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 <Route path="/" element={ <TelegramApp /> } />
                 <Route path="/account" element={ <AccountList/> } />
                 <Route path="/account/:accountId/category" element={ <CategoryList/> } />
                 <Route path="/account/:accountId/category/:categoryId" element={ <ProductList/> } />
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     </Provider>
 );
 
