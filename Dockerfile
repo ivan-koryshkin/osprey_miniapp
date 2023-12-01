@@ -7,6 +7,7 @@ COPY src src
 COPY public public
 COPY server.js server.js
 
+ARG PUBLIC_URL=miniapp
 RUN npm install
 RUN npm run build
 CMD ["node", "server.js"]
