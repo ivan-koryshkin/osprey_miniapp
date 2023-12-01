@@ -2,6 +2,7 @@ import { AppTheme, AppUser, AppStyle } from "./type";
 
 export class Application {
     getTheme() : AppTheme {
+        console.log(window.Telegram.WebView.initParams.tgWebAppThemeParams)
         const appTheme = JSON.parse(
             window.Telegram.WebView.initParams.tgWebAppThemeParams
         );

@@ -29,6 +29,7 @@ export const syncUser = createAsyncThunk<UserData, UserData>(
     "user/sync",
     async (userData, { rejectWithValue }) => {
         try {
+            console.log('user sync')
             const response = await fetch(API_USER_LIST, {
                 method: 'POST',
                 headers: {
@@ -41,6 +42,7 @@ export const syncUser = createAsyncThunk<UserData, UserData>(
             }
             return await response.json()
         } catch (e: any) {
+            console.log(e.message)
             return rejectWithValue(e.message);
         }
     }
@@ -51,6 +53,8 @@ const startPageSlice = createSlice({
     name: "startPageSlice",
     reducers: {
         readUserData: (state: StartPageState) => {
+            console.log('Get user data')
+            console.log(window.Telegram.WebApp.initData)
             let newState = {...state}
             let data: string = decodeURI(window.Telegram.WebApp.initData)
             let dataItems = data.split("&")
