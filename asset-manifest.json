@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/osprey_miniapp/static/css/main.641502e5.css",
-    "main.js": "/osprey_miniapp/static/js/main.f767ebe5.js",
-    "static/js/651.587c2069.chunk.js": "/osprey_miniapp/static/js/651.587c2069.chunk.js",
-    "index.html": "/osprey_miniapp/index.html",
-    "main.641502e5.css.map": "/osprey_miniapp/static/css/main.641502e5.css.map",
-    "main.f767ebe5.js.map": "/osprey_miniapp/static/js/main.f767ebe5.js.map",
-    "651.587c2069.chunk.js.map": "/osprey_miniapp/static/js/651.587c2069.chunk.js.map"
+    "main.css": "./static/css/main.641502e5.css",
+    "main.js": "./static/js/main.e46a17f8.js",
+    "static/js/651.587c2069.chunk.js": "./static/js/651.587c2069.chunk.js",
+    "index.html": "./index.html",
+    "main.641502e5.css.map": "./static/css/main.641502e5.css.map",
+    "main.e46a17f8.js.map": "./static/js/main.e46a17f8.js.map",
+    "651.587c2069.chunk.js.map": "./static/js/651.587c2069.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.641502e5.css",
-    "static/js/main.f767ebe5.js"
+    "static/js/main.e46a17f8.js"
   ]
 }
