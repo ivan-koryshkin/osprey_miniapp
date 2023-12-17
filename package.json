@@ -2,7 +2,7 @@
   "name": "osprey_miniapp",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ivan-koryshkin.github.io/osprey_miniapp/",
+  "homepage": ".",
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",

@@ -18,6 +18,7 @@ const TelegramUserData = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        console.log("telegram app")
         if(state.status === 'idle' && state.user) {
             dispatch(syncUser(state.user))
             navigate("/account")
