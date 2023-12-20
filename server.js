@@ -8,7 +8,7 @@ const staticDir = path.resolve(__dirname, 'build')
 app.use(express.static(staticDir))
 
 app.get('*', (req, res) => {
-    console.log('*')
+    console.log('miniapp.*')
     const indexPage = path.resolve(__dirname, 'build', 'index.html');
     res.sendFile(indexPage);
 });
