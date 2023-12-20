@@ -10,4 +10,4 @@ COPY server.js server.js
 ARG PUBLIC_URL=miniapp
 RUN npm install
 RUN npm run build
-CMD ["node", "server.js"]
+CMD ["sh", "-c", "PUBLIC_URL=miniapp node server.js"]
