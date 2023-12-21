@@ -11,4 +11,4 @@ ARG PUBLIC_URL=/miniapp
 ENV REACT_APP_PUBLIC_URL $PUBLIC_URL
 RUN npm install
 RUN npm run build
-CMD ["sh", "-c", "PUBLIC_URL=miniapp node server.js"]
+CMD ["sh", "node server.js"]

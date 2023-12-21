@@ -25,6 +25,7 @@ root.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={ <TelegramApp /> } />
+                <Route path="/miniapp" element={ <TelegramApp /> } />
                 <Route path="/account" element={ <AccountList/> } />
                 <Route path="/account/:accountId/category" element={ <CategoryList/> } />
                 <Route path="/account/:accountId/category/:categoryId" element={ <ProductList/> } />

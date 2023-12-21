@@ -1,8 +1,26 @@
 import { AppTheme, AppUser, AppStyle } from "./type";
 
 export class Application {
+    isMiniApp() : boolean {
+        return !!window.Telegram.WebView.initParams.tgWebAppThemeParams
+
+    }
+    getDefaultTheme() : AppTheme {
+        return {
+            bgColor: '#FFFFFF',
+            textColor: '#000000',
+            hintColor: '#C0C0C0',
+            linkColor: '#0000FF',
+            buttonColor: '#1E90FF',
+            buttonTextColor: '#FFFFFF',
+            secondaryBgColor: '#DCDCDC',
+        }
+    }
     getTheme() : AppTheme {
-        console.log(window.Telegram.WebView.initParams.tgWebAppThemeParams)
+        console.log(window.Telegram)
+        if(!this.isMiniApp()) {
+            return this.getDefaultTheme()
+        }
         const appTheme = JSON.parse(
             window.Telegram.WebView.initParams.tgWebAppThemeParams
         );

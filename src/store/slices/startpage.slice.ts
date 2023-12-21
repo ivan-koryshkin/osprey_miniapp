@@ -5,6 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { UserData } from "../../types";
 import {API_USER_LIST} from "../../consts";
+import {Application} from "../../tg.miniapp/application";
 
 export interface Theme {
     bg_color: string,
@@ -19,17 +20,18 @@ export interface StartPageState {
     status: 'done' | 'error' | 'pending' | 'idle'
     user?: UserData
     theme?: Theme
+    telegramBrowser: boolean
 }
 
 const initialState: StartPageState = {
-    status: "idle"
+    status: "idle",
+    telegramBrowser: true
 }
 
 export const syncUser = createAsyncThunk<UserData, UserData>(
     "user/sync",
     async (userData, { rejectWithValue }) => {
         try {
-            console.log('user sync')
             const response = await fetch(API_USER_LIST, {
                 method: 'POST',
                 headers: {
@@ -53,9 +55,12 @@ const startPageSlice = createSlice({
     name: "startPageSlice",
     reducers: {
         readUserData: (state: StartPageState) => {
-            console.log('Get user data')
-            console.log(window.Telegram.WebApp.initData)
+            const app = new Application()
             let newState = {...state}
+            if(!app.isMiniApp()) {
+                newState.telegramBrowser = false
+                return newState
+            }
             let data: string = decodeURI(window.Telegram.WebApp.initData)
             let dataItems = data.split("&")
             const userData = dataItems.filter((item: string) => {

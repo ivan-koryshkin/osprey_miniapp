@@ -13,17 +13,27 @@ const TelegramUserData = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log("Init application")
         dispatch(readUserData())
     }, [dispatch]);
 
     useEffect(() => {
-        console.log("telegram app")
-        if(state.status === 'idle' && state.user) {
+        if(state.telegramBrowser && state.status === 'idle' && state.user) {
             dispatch(syncUser(state.user))
             navigate("/account")
-        } else {}
+        }
     })
+
+    const buildMessage = () => {
+        if(!state.telegramBrowser) {
+            return (
+                <p> This app working only inside telegram application :(</p>
+            )
+        } else if(state.user) {
+            return (<p>Last Name: {state.user.firstName}</p>)
+        } else {
+            return (<p>Loading user data...</p>)
+        }
+    }
 
     return (
         <div style={{
@@ -32,17 +42,7 @@ const TelegramUserData = () => {
             display: "flex",
             width: "100%"
         }}>
-            {state.user ? (
-                <div>
-                    <h2>Telegram User Data</h2>
-                    <p>id: {state.user.id}</p>
-                    <p>Name: {state.user.firstName}</p>
-                    <p>Last Name: {state.user.firstName}</p>
-                    <p>Username: {state.user.username}</p>
-                </div>
-            ) : (
-                <p>Loading user data...</p>
-            )}
+            { buildMessage() }
         </div>
     );
 };

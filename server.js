@@ -5,11 +5,13 @@ const app = express()
 
 const staticDir = path.resolve(__dirname, 'build')
 
-app.use(express.static(staticDir))
+app.use('/miniapp', express.static(staticDir))
 
 app.get('*', (req, res) => {
-    console.log('miniapp.*')
+    const date = new Date()
+    console.log(`[${date.toISOString()}] ${req.url}`)
     const indexPage = path.resolve(__dirname, 'build', 'index.html');
+    res.header('content-type', 'application/js')
     res.sendFile(indexPage);
 });
 
