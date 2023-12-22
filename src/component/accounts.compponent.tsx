@@ -10,6 +10,8 @@ import {AccountData} from "../types";
 import "../styles/card.component.css"
 import {WebAppPage} from "./page.component";
 import { Application } from "../tg.miniapp/application"
+import { Loader } from "./loader.component";
+import { AppList } from "./applist.component";
 
 
 export const AccountList = () => {
@@ -23,9 +25,11 @@ export const AccountList = () => {
     }, [dispatch]);
 
     const buildList = () => {
+        if(state.status === 'pending') {
+            return (<Loader/>)
+        }
         return (
-            <List
-                itemLayout="vertical"
+            <AppList
                 dataSource={state.accountList}
                 renderItem={
                     (account: AccountData) => (
@@ -44,7 +48,7 @@ export const AccountList = () => {
                                 }}
                             >
                                 <div className="card-description">
-                                    <p>Content</p>
+                                    <p> Content </p>
                                 </div>
                             </Card>
                         </List.Item>

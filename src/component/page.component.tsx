@@ -49,8 +49,8 @@ export const WebAppPage: React.FC<WebAppPageProps> = ({ children }) => {
                         title={
                             <div style={{...style}}>Cart</div>
                         }
-                        // open={state.showCart}
-                        // onOk={ () => onOk() }
+                        open={state.showCart}
+                        onOk={ () => onOk() }
                         onCancel={ () => dispatch(changeCartVisibility())}
                         styles={{
                             header: { ...style },

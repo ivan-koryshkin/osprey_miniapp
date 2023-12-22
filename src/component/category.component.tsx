@@ -1,15 +1,17 @@
-import React, {useEffect} from "react";
-import {Card, List} from 'antd'
-import {useAppDispatch, useAppSelector} from "../app.hooks";
+import React, { useEffect } from "react";
+import { Card, List } from 'antd'
+import { useAppDispatch, useAppSelector } from "../app.hooks";
 import {
     CategoryListPage,
     fetchCategoryList,
 } from "../store/slices/category.slice";
-import {CategoryData} from "../types";
-import {useNavigate, useParams} from "react-router-dom";
-import {WebAppPage} from "./page.component";
+import { CategoryData } from "../types";
+import { useNavigate, useParams } from "react-router-dom";
+import { WebAppPage } from "./page.component";
 import "../styles/card.component.css"
-import {Application} from "../tg.miniapp/application";
+import { Application } from "../tg.miniapp/application";
+import { Loader } from "./loader.component";
+import { AppList } from "./applist.component";
 
 
 export const CategoryList = () => {
@@ -26,9 +28,11 @@ export const CategoryList = () => {
     }, [dispatch, accountId]);
 
     const buildList = () => {
+        if(state.status === 'pending') {
+            return (<Loader/>)
+        }
         return (
-            <List
-                itemLayout="vertical"
+            <AppList
                 dataSource={state.categoryList ? state.categoryList : []}
                 renderItem={(category: CategoryData) => (
                     <List.Item>

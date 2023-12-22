@@ -4,7 +4,7 @@ import {Button, Card, List} from "antd";
 
 import "../styles/cart.component.css"
 import {Application} from "../tg.miniapp/application";
-
+import { AppList } from "./applist.component";
 
 interface CartProps {
     products: CartItem[]
@@ -15,7 +15,7 @@ interface CartProps {
 export const Cart: React.FC<CartProps> = (props: CartProps) => {
     const app = new Application()
     return (
-        <List
+        <AppList
             itemLayout="vertical"
             dataSource={props.products}
             renderItem={(item: CartItem) => (

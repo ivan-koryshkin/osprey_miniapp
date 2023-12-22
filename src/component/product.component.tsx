@@ -21,7 +21,8 @@ import { WebAppPage } from "./page.component";
 import '../styles/product.component.css'
 import '../styles/card.component.css'
 import {Application} from "../tg.miniapp/application";
-
+import { Loader } from "./loader.component";
+import { AppList } from "./applist.component";
 
 export const ProductList = () => {
     const state = useAppSelector<ProductListPage>(state => state.productPage)
@@ -40,9 +41,14 @@ export const ProductList = () => {
     }, [dispatch, accountId, categoryId]);
 
     const buildList = () => {
+        if(state.status === 'pending') {
+            return (<Loader/>)
+        }
         return (
-            <List
-                dataSource={Array.isArray(state.productList) ? state.productList : []}
+            <AppList
+                dataSource={
+                    Array.isArray(state.productList) ? state.productList : []
+                }
                 renderItem={(product: ProductData) => (
                     <List.Item>
                         <Card
@@ -87,7 +93,6 @@ export const ProductList = () => {
                         </Card>
                     </List.Item>
                 )}
-                itemLayout="vertical"
             />
         )
     }

@@ -88,4 +88,8 @@ export class Application {
         }
         return null
     }
+
+    close() {
+        window.Telegram.WebApp.close()
+    }
 }
