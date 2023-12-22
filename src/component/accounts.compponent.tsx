@@ -30,7 +30,7 @@ export const AccountList = () => {
         }
         return (
             <AppList
-                dataSource={state.accountList}
+                dataSource={state.accountList ?? []}
                 renderItem={
                     (account: AccountData) => (
                         <List.Item>

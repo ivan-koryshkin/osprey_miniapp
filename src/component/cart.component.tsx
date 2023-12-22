@@ -16,7 +16,6 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
     const app = new Application()
     return (
         <AppList
-            itemLayout="vertical"
             dataSource={props.products}
             renderItem={(item: CartItem) => (
                 <List.Item>
