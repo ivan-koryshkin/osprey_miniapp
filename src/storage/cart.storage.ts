@@ -118,4 +118,7 @@ export class CartStorage extends WebStorage {
         }
     }
 
+    payload() : object {
+        return { cartItems: this.deserialize() }
+    }
 }

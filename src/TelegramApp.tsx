@@ -29,7 +29,7 @@ const TelegramUserData = () => {
                 <p> This app working only inside telegram application :(</p>
             )
         } else if(state.user) {
-            return (<p>Last Name: {state.user.firstName}</p>)
+            return (<p>Last Name: {state.user.id}</p>)
         } else {
             return (<p>Loading user data...</p>)
         }

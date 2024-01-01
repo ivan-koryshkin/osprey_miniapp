@@ -46,9 +46,12 @@ const pageSlice = createSlice({
             state.cart = storage.decrement(action.payload);
         },
         sendCartToBot: (state: PageState) => {
+            const app = new Application();
             const storage = new CartStorage();
-            storage.sendData()
             state.cart = []
+            const payload = storage.payload()
+            storage.clear()
+            app.sendDataToBot(payload)
         }
     }
 })

@@ -6,6 +6,7 @@ import {
 import { UserData } from "../../types";
 import {API_USER_LIST} from "../../consts";
 import {Application} from "../../tg.miniapp/application";
+import { UserStorage } from "../../storage/user.storage"
 
 export interface Theme {
     bg_color: string,
@@ -69,14 +70,24 @@ const startPageSlice = createSlice({
                 }
                 return undefined
             })
-            if(userData) {
+            const userStorage = new UserStorage();
+            if(userData.length > 0) {
+                console.log({user: userData})
                 const raw = userData[0].replace("user=", "")
                 const decoded = JSON.parse(decodeURIComponent(raw))
-                newState.user = {
-                    id: decoded["id"],
-                    firstName: decoded["first_name"],
-                    lastName: decoded["last_name"],
-                    username: decoded["username"]
+                newState.user = { id: decoded["id"] }
+                userStorage.add(decoded["id"])
+            } else {
+                const queryParams = window.location.href
+                    .split('?')[1] // query at right side
+                    .split('#')[0] // query at left side
+
+                const params = new window.URLSearchParams(queryParams)
+                const userId = params.get('userId')
+                if(userId) {
+                    console.log(userId)
+                    newState.user = {id: userId}
+                    userStorage.add(userId)
                 }
             }
             let themeData = JSON.parse(window.Telegram.WebView.initParams.tgWebAppThemeParams);

@@ -19,3 +19,9 @@ export interface AppStyle {
     background: string;
     color: string;
 }
+
+export interface AppStyleHook {
+    appStyle: AppStyle
+    buttonsStyle: AppStyle
+    secondaryStyle: AppStyle
+}

@@ -65,7 +65,7 @@ export const ProductList = () => {
                                 <p>{product.description}</p>
                             </div>
                             <div className="product-cart-price">
-                                <p>💸 {product.price} 💸 </p>
+                                <p>{product.price} GEL</p>
                             </div>
                             <div className="product-cart-controls">
                                 <Button

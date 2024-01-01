@@ -67,29 +67,14 @@ export class Application {
         }
     }
 
-    getUser() : AppUser | null {
-        let data: string = decodeURI(window.Telegram.WebApp.initData)
-        let dataItems = data.split("&")
-        const userData = dataItems.filter((item: string) => {
-            if(item.search("user=") !== -1) {
-                return item
-            }
-            return undefined
-        })
-        if(userData) {
-            const raw = userData[0].replace("user=", "")
-            const decoded = JSON.parse(decodeURIComponent(raw))
-            return  {
-                id: decoded["id"],
-                firstName: decoded["first_name"],
-                lastName: decoded["last_name"],
-                username: decoded["username"]
-            }
-        }
-        return null
-    }
-
     close() {
         window.Telegram.WebApp.close()
+    }
+
+    sendDataToBot(payload: any) {
+        try {
+            const data = JSON.stringify(payload)
+            window.Telegram.WebApp.sendData(data)
+        } catch (e) { console.log(e) }
     }
 }

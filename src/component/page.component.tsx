@@ -1,17 +1,21 @@
 import React, {ReactNode} from 'react';
-import {BackButton} from "./backbutton.component";
-import {useAppDispatch, useAppSelector} from "../app.hooks";
-import {FloatButton, Modal, Layout, Button} from "antd";
-import {ShoppingCartOutlined} from "@ant-design/icons";
+import { BackButton } from "./backbutton.component";
+import { useAppDispatch, useAppSelector } from "../app.hooks";
+import { FloatButton, Modal, Layout, Button } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Application } from "../tg.miniapp/application";
 import {
     changeCartVisibility, decrementProduct,
     incrementProduct,
     PageState, sendCartToBot
 } from "../store/slices/page.slice";
-import {Cart} from './cart.component'
+import { Cart } from './cart.component'
+import { useTelegramWebApp, useTelegramAppColor } from "../tg.miniapp"
+
 import "../styles/webappPage.component.css"
-import {Application} from "../tg.miniapp/application";
-const {Footer, Content} = Layout;
+
+
+const { Footer, Content } = Layout;
 
 export interface WebAppPageProps {
     children: ReactNode;
@@ -20,9 +24,7 @@ export interface WebAppPageProps {
 export const WebAppPage: React.FC<WebAppPageProps> = ({ children }) => {
     const state = useAppSelector<PageState>(state => state.rootPage)
     const dispatch = useAppDispatch()
-    const app = new Application()
-    const style = app.getStyle()
-    const btnStyle = app.getButtonStyle()
+    const { primary, button } = useTelegramAppColor()
 
     const increment = (productId: string) => {
         dispatch(incrementProduct(productId))
@@ -47,21 +49,31 @@ export const WebAppPage: React.FC<WebAppPageProps> = ({ children }) => {
                     />
                     <Modal
                         title={
-                            <div style={{...style}}>Cart</div>
+                            <div style={{ ...primary }}>Cart</div>
                         }
                         open={state.showCart}
                         onOk={ () => onOk() }
                         onCancel={ () => dispatch(changeCartVisibility())}
                         styles={{
-                            header: { ...style },
-                            body: { ...style },
-                            footer: { ...style },
-                            content: { ...style }
+                            header: { ...primary },
+                            body: { ...primary },
+                            footer: { ...primary },
+                            content: { ...primary }
                         }}
                         footer={
                             <div>
-                                <Button style={{...btnStyle}} onClick={ () => onOk() }>Ok</Button>
-                                <Button style={{...btnStyle}} onClick={ () => dispatch(changeCartVisibility()) }>Cancel</Button>
+                                <Button
+                                    style={{...button}}
+                                    onClick={ () => onOk() }>
+                                    Ok
+                                </Button>
+                                <Button
+                                    style={{...button}}
+                                    onClick={
+                                        () => dispatch(changeCartVisibility())
+                                    }>
+                                    Cancel
+                                </Button>
                             </div>
                         }
                     >
