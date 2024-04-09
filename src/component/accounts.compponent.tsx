@@ -48,7 +48,7 @@ export const AccountList = () => {
                                 }}
                             >
                                 <div className="card-description">
-                                    <p> Content </p>
+                                    <p> {account.description} </p>
                                 </div>
                             </Card>
                         </List.Item>
