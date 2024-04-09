@@ -1,5 +1,4 @@
-import {Card, List} from 'antd'
-import {CategoryData} from "../types";
+import { List } from 'antd'
 import React from "react";
 import { RedoOutlined } from '@ant-design/icons'
 

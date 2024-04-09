@@ -5,6 +5,7 @@ export interface UserData {
 export interface AccountData {
     id: string
     name: string
+    description: string
 }
 
 export interface ProductData {

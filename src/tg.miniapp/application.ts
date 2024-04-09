@@ -1,4 +1,4 @@
-import { AppTheme, AppUser, AppStyle } from "./type";
+import { AppTheme, AppStyle } from "./type";
 
 export class Application {
     isMiniApp() : boolean {

@@ -3,14 +3,13 @@ import { BackButton } from "./backbutton.component";
 import { useAppDispatch, useAppSelector } from "../app.hooks";
 import { FloatButton, Modal, Layout, Button } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Application } from "../tg.miniapp/application";
 import {
     changeCartVisibility, decrementProduct,
     incrementProduct,
     PageState, sendCartToBot
 } from "../store/slices/page.slice";
 import { Cart } from './cart.component'
-import { useTelegramWebApp, useTelegramAppColor } from "../tg.miniapp"
+import { useTelegramAppColor } from "../tg.miniapp"
 
 import "../styles/webappPage.component.css"
 
